@@ -1,0 +1,10 @@
+[
+    {
+        "caption": "TracRPC: List Tickets",
+        "command": "trac_list_tickets"
+    },
+    {
+        "caption": "TracRPC: Paste HG/GIT Reference",
+        "command": "trac_paste_reference"
+    },
+]

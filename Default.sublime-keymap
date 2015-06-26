@@ -1,0 +1,6 @@
+[
+
+	{ "keys": ["super+t", "super+t"], "command": "trac_list_tickets" },
+    { "keys": ["super+t", "super+r"], "command": "trac_paste_reference" },
+
+]
