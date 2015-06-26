@@ -15,7 +15,7 @@ git clone https://github.com/lyrixderaven/TracRPC.git
 ```
 "settings":
 	{
-		    "trac_user": "me@myhost.com",
+	"trac_user": "me@myhost.com",
         "trac_pw": "my_super_secret_pw",
         "trac_url": "https://myhost.com/mytrac",
 	}
