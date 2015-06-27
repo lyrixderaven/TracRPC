@@ -1,7 +1,11 @@
 [
     {
-        "caption": "TracRPC: List Tickets",
+        "caption": "TracRPC: List Tickets owned",
         "command": "trac_list_tickets"
+    },
+    {
+        "caption": "TracRPC: List Tickets owned,cc and reported",
+        "command": "trac_list_all_tickets"
     },
     {
         "caption": "TracRPC: Paste HG/GIT Reference",

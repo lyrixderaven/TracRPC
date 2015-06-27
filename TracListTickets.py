@@ -26,6 +26,18 @@ class TracListTicketsCommand(sublime_plugin.TextCommand):
         self.view.window().show_quick_panel(ticket_list, self.on_done, 1, 2)
 
 
+class TracListAllTicketsCommand(TracListTicketsCommand):
+
+    def run(self, edit, **args):
+        self.controller = TracController(self.view)
+
+        self.active_tickets = self.controller.get_all_active_user_tickets()
+        print("ActiveTickets {}".format(self.active_tickets))
+        ticket_list = [t['title_string'] for t in self.active_tickets]
+
+        self.view.window().show_quick_panel(ticket_list, self.on_done, 1, 2)
+
+
 class TracPasteReferenceCommand(TracListTicketsCommand):
 
     def on_done(self, index):

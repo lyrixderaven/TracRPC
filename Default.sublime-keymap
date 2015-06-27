@@ -3,5 +3,6 @@
 	{ "keys": ["super+t", "super+t"], "command": "trac_list_tickets" },
     { "keys": ["super+t", "super+r"], "command": "trac_paste_reference" },
     { "keys": ["super+t", "super+y"], "command": "trac_comment" },
+    { "keys": ["super+t", "super+a"], "command": "trac_list_all_tickets" },
 
 ]

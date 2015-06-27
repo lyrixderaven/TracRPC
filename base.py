@@ -33,20 +33,44 @@ class TracController():
 
         return multicall()
 
+    def _parse_ticket_data(self, ticket):
+        status_tag = "[{}]".format(ticket[3]['status'])
+        ticket_string = "{}{}#{} {}".format(
+            status_tag,
+            " " * (12 - len(status_tag)),
+            ticket[0],
+            ticket[3]['summary'])
+        ticket_url = "{}/ticket/{}".format(self.base_url, ticket[0])
+        print("{}: {}".format(ticket_string, ticket[3]['status']))
+
+        return {
+            'id': ticket[0],
+            'title_string': ticket_string,
+            'url': ticket_url,
+            'ticket': ticket[3]
+        }
+
     def get_active_user_tickets(self):
         qstr = "owner=~{}&status!=closed".format(self.user)
-        #qstr = "owner=~{}&order=id".format(self.user)
 
         tickets_response = self._get_tickets(qstr)
         tickets = []
         for ticket in tickets_response:
-            ticket_string = "#{} {}".format(ticket[0], ticket[3]['summary'])
-            ticket_url = "{}/ticket/{}".format(self.base_url, ticket[0])
-            tickets.append({
-                'id': ticket[0],
-                'title_string': ticket_string,
-                'url': ticket_url
-            })
+            ticket_data = self._parse_ticket_data(ticket)
+            tickets.append(ticket_data)
+
+        return tickets
+
+    def get_all_active_user_tickets(self):
+        qstr = "owner=~{}&or&cc=~{}&or&reporter=~{}&desc=1&order=changetime".format(
+            self.user, self.user, self.user)
+
+        tickets_response = self._get_tickets(qstr)
+        tickets = []
+        for ticket in tickets_response:
+            ticket_data = self._parse_ticket_data(ticket)
+            if ticket_data['ticket']['status'] != u'closed':
+                tickets.append(ticket_data)
 
         return tickets
 

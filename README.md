@@ -25,7 +25,9 @@ Sublime Text should automatically update and include the package; you can check 
 
 ## Usage
 
-Currently, only two commands are implemented:
+Currently, the following commands are implemented:
 
-1. List my tickets (⌘+t, ⌘+t)
-2. Insert `[refs #1]` references statement for commit messages (⌘+t,⌘+r)
+1. List my tickets (owned) (⌘+t, ⌘+t)
+2. List all my tickets (owned, reported, cc) ((⌘+t, ⌘+a)
+3. Insert `[refs #1]` references statement for commit messages (⌘+t, ⌘+r)
+4. Add comment to ticket (⌘+t, ⌘+y)

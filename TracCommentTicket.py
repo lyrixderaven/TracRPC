@@ -1,21 +1,21 @@
 import sublime
 import sublime_plugin
 
-from .open_views import OpenViews
+from .active_views import ActiveViews
 from .base import TracController
 
 
 class OnCloseUpdateMessage(sublime_plugin.EventListener):
 
     def on_close(self, view):
-        if not OpenViews.exists(view):
+        if not ActiveViews.exists(view):
             return
 
-        view_dict = OpenViews.get(view)
+        view_dict = ActiveViews.get(view)
         if not 'ticket_id' in view_dict:
             print("No ticket id found")
             return
-        OpenViews.remove(view)
+        ActiveViews.remove(view)
         comment_text = view.substr(sublime.Region(0, view.size()))
         comment_text = "\n".join(
             [line for line in iter(comment_text.splitlines()) if not line.startswith("#")])
@@ -43,7 +43,7 @@ class TracCommentCommand(sublime_plugin.TextCommand):
         ticket_title = self.active_tickets[index]['title_string']
 
         update_view = self.view.window().new_file()
-        OpenViews.set(update_view, ticket_id=ticket_id)
+        ActiveViews.set(update_view, ticket_id=ticket_id)
 
         comment = "\n\n# Commenting on \n# Ticket {}\n#\n# Enter your comment above and close when you're done.\n# Any line starting with a '#' will be ignored.".format(
             ticket_title)

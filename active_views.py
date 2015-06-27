@@ -1,4 +1,4 @@
-class OpenViews():
+class ActiveViews():
     cache = []
 
     @classmethod
