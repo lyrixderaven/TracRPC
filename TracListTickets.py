@@ -1,8 +1,9 @@
 import webbrowser
-from .base import BaseTracCommand
+import sublime_plugin
+from .base import TracController
 
 
-class TracListTicketsCommand(BaseTracCommand):
+class TracListTicketsCommand(sublime_plugin.TextCommand):
 
     def on_done(self, index):
 
@@ -16,6 +17,7 @@ class TracListTicketsCommand(BaseTracCommand):
         webbrowser.open_new_tab(url)
 
     def run(self, edit, **args):
+        self.controller = TracController(self.view)
 
         self.active_tickets = self.controller.get_active_user_tickets()
         print("ActiveTickets {}".format(self.active_tickets))

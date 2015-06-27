@@ -2,6 +2,7 @@ import sublime
 import sublime_plugin
 import xmlrpc.client
 
+
 class TracController():
 
     def __init__(self, view, trac_url=None, trac_user=None, trac_pw=None):
@@ -49,9 +50,12 @@ class TracController():
 
         return tickets
 
+    def post_comment(self, ticket_id, comment):
 
-class BaseTracCommand(sublime_plugin.TextCommand):
-
-    def __init__(self, *args, **kwargs):
-        super(BaseTracCommand, self).__init__(*args, **kwargs)
-        self.controller = TracController(self.view)
+        resp = self.trac_server.ticket.update(
+            ticket_id,
+            comment,
+            {},         # Attributes
+            True,       # Notifications?
+            self.user)  # Author
+        print(resp)

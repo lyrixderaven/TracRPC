@@ -8,8 +8,11 @@ class OpenViews():
                 return view_dict
 
     @classmethod
-    def set(cls, view):
-        cls.cache.append({'id': view.id()})
+    def set(cls, view, **kwargs):
+        view_dict = {'id': view.id()}
+        for kwarg in kwargs.keys():
+            view_dict[kwarg] = kwargs[kwarg]
+        cls.cache.append(view_dict)
 
     @classmethod
     def exists(cls, view):
