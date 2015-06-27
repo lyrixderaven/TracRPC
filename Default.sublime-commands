@@ -7,4 +7,8 @@
         "caption": "TracRPC: Paste HG/GIT Reference",
         "command": "trac_paste_reference"
     },
+    {
+        "caption": "TracRPC: Comment On Ticket",
+        "command": "trac_comment"
+    },
 ]

@@ -1,5 +1,5 @@
 {
 	"trac_user": "<my_user>@wienfluss.net",
     "trac_pw": "<super_secret_pw>",
-    "trac_url": "https://trac.wienfluss.net/enercoach",
+    "trac_url": "https://myhost/mytrac",
 }
