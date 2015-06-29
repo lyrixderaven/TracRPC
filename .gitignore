@@ -26,6 +26,7 @@ var/
 # SublimeText Projects
 *.sublime-project
 *.sublime-workspace
+package-metadata.json
 
 # PyInstaller
 #  Usually these files are written by a python script from a template
