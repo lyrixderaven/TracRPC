@@ -1,7 +1,7 @@
 # TracRPC
-Trac RPC package for Sublime Text 3
+Trac RPC package for [Sublime Text 3](https://www.sublimetext.com/3)
 
-Sublime Text Trac-Plugin to interface with an existing trac project.
+Sublime Text Trac-Plugin to interface with an existing [trac](http://trac.edgewall.org/) project.
 
 ## Preconditions
 
@@ -35,6 +35,7 @@ The package requires some settings to work, specifically setting url and authent
         "trac_url": "https://myhost.com/mytrac",
 	}
 ```
+Mind that the URL to your trac instance does not need a trailing slash or the `/rpc` postfix; the plugin takes care of that by itself. 
 
 Sublime Text should automatically update and include the package; you can check the presence of the package by looking at the settings, which should contain a new entry for TracRPC at `Preferences>Package Settings>TracRPC`
 
