@@ -3,19 +3,34 @@ Trac RPC package for Sublime Text 3
 
 Sublime Text Trac-Plugin to interface with an existing trac project.
 
+## Preconditions
+
+Besides using the Sublime Text 3 editor, you will need to install the [Trac XML-RPC](https://trac-hacks.org/wiki/XmlRpcPlugin) plugin to your trac instance. Installation instructions can be found on the plugins website. Furthermore, the user you are using to connect to Trac might need to have the `XML_RPC` permission.
+
 ## Installation
 
-Since this package is still in development, package control is not available as of yet. To install this dev-preview, follow these steps:
+### Package Control
+
+Since this package has officially been accepted, it is available via [Package Control](https://packagecontrol.io/).
+
+### Manual Installation
+
+For bleeding-edge dev-versions, you can directly clone this github repository. To install this dev-preview, follow these steps:
 
 - Clone the git repository into your Sublime Text Package directory as a whole
 ```
 git clone https://github.com/lyrixderaven/TracRPC.git
 ```
+
+## Settings
+
+The package requires some settings to work, specifically setting url and authentication credentials for your Trac Environment:
+
 - Edit your project settings file to include the settings for your trac instance
 ```
 "settings":
 	{
-	"trac_user": "me@myhost.com",
+        "trac_user": "me@myhost.com",
         "trac_pw": "my_super_secret_pw",
         "trac_url": "https://myhost.com/mytrac",
 	}
