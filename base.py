@@ -1,6 +1,5 @@
-import sublime
-import sublime_plugin
 import xmlrpc.client
+from urllib.parse import quote
 
 
 class TracController():
@@ -14,11 +13,10 @@ class TracController():
         self.pw = trac_pw or self.view.settings().get("trac_pw")
 
         self.rpc_url = self.rpc_url.replace('https://', 'https://{}:{}@'.format(
-            self.user,
-            self.pw))
+            quote(self.user),
+            quote(self.pw)))
         try:
             self.trac_server = xmlrpc.client.ServerProxy(self.rpc_url)
-            print("Created server proxy @ {}".format(self.rpc_url))
         except:
             print("Couldn't create server proxy @ {}".format(self.rpc_url))
 
@@ -62,7 +60,26 @@ class TracController():
         return tickets
 
     def get_all_active_user_tickets(self):
-        qstr = "owner=~{}&or&cc=~{}&or&reporter=~{}&desc=1&order=changetime".format(
+        qargs = [
+            'owner=~{}',
+            'status=assigned',
+            'status=new',
+            'status=reopened',
+            'status=testing',
+            'or',
+            'cc=~{}',
+            'or',
+            'reporter=~{}',
+            'col=id',
+            'col=summary',
+            'col=status',
+            'col=type',
+            'col=priority',
+            'col=time',
+            'col=changetime',
+            'order=priority',
+        ]
+        qstr = "&".join(qargs).format(
             self.user, self.user, self.user)
 
         tickets_response = self._get_tickets(qstr)
@@ -73,6 +90,11 @@ class TracController():
                 tickets.append(ticket_data)
 
         return tickets
+
+    def get_changelog(self, ticket_id):
+        resp = self.trac_server.ticket.changeLog(ticket_id)
+        print(resp)
+        return resp
 
     def post_comment(self, ticket_id, comment):
 

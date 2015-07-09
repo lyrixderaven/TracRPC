@@ -45,8 +45,35 @@ class TracCommentCommand(sublime_plugin.TextCommand):
         update_view = self.view.window().new_file()
         ActiveViews.set(update_view, ticket_id=ticket_id)
 
-        comment = "\n\n# Commenting on \n# Ticket {}\n#\n# Enter your comment above and close when you're done.\n# Any line starting with a '#' will be ignored.".format(
-            ticket_title)
+        changelog = self.controller.get_changelog(ticket_id)
+        changelogs = []
+
+        for change in changelog:
+            change_type = change[2]
+            change_desc = ""
+            if change_type == 'status':
+                change_desc = "status: {} -> {}".format(change[3], change[4])
+            if change_type == 'comment':
+                change_desc = 'comment added'
+            if change_type == 'blocking':
+                change_desc = 'blocking -> {}'.format(change[4])
+            if change_type == 'blockedby':
+                change_desc = 'blocked by -> {}'.format(change[5])
+
+            change_text = "# {} @ {}: {}".format(
+                change[1],
+                change[0],
+                change_desc
+            )
+            changelogs.append(change_text)
+
+        changelog_list = "\n".join(changelogs)
+        comment = "\n\n\n\n# Commenting on \n# Ticket {}\n#\n#\n# Enter your comment above and close when you're done.\n# Any line starting with a '#' will be ignored.\n# Changelist:\n#\n{}".format(
+            ticket_title,
+            changelog_list)
+
+        # for change in changelog:
+        #     comment = comment + "\n\n" + "\n".join([str(c) for c in change])
 
         update_view.run_command(
             "insert",
