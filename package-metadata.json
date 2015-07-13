@@ -1,7 +1,0 @@
-{
-    "description": "A SublimeText plugin for reinteracting with an RPC enabled Trac instance.",
-    "sublime_text": "*",
-    "platforms": ["*"],
-    "url": "",
-    "version": "1.0.0_rc1",
-    "dependencies": []}
