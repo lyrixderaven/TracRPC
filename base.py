@@ -49,7 +49,18 @@ class TracController():
         }
 
     def get_active_user_tickets(self):
-        qstr = "owner=~{}&status!=closed".format(self.user)
+        qstr = u"owner=~{}&status!=closed".format(self.user)
+
+        tickets_response = self._get_tickets(qstr)
+        tickets = []
+        for ticket in tickets_response:
+            ticket_data = self._parse_ticket_data(ticket)
+            tickets.append(ticket_data)
+
+        return tickets
+
+    def get_active_tickets(self):
+        qstr = u"status!=closed"
 
         tickets_response = self._get_tickets(qstr)
         tickets = []
